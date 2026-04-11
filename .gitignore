@@ -1,0 +1,3 @@
+kubeconfig.yaml
+kubeconfig_base64.txt
+*.base64
