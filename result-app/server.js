@@ -12,10 +12,6 @@ const pool = new Pool({
     password: 'postgres',
 });
 
-// ============================================
-// Prometheus метрики для SLO
-// ============================================
-
 // Счётчик HTTP запросов (для Traffic и Error Rate)
 const httpRequestsTotal = new client.Counter({
     name: 'http_requests_total',
@@ -50,9 +46,7 @@ app.get('/metrics', async (req, res) => {
     res.set('Content-Type', client.register.contentType);
     res.end(await client.register.metrics());
 });
-// ============================================
 
-// Главная страница с результатами
 app.get('/', async (req, res) => {
     try {
         const result = await pool.query('SELECT vote, COUNT(id) as count FROM votes GROUP BY vote');

@@ -11,10 +11,7 @@ redis_host = os.getenv('REDIS_HOST', 'redis')
 redis_port = int(os.getenv('REDIS_PORT', 6379))
 r = redis.Redis(host=redis_host, port=redis_port, decode_responses=True)
 
-# ============================================
 # Prometheus метрики
-# ============================================
-
 http_requests_total = Counter(
     'http_requests_total',
     'Total HTTP requests',
@@ -52,9 +49,6 @@ def after_request(response):
 def metrics():
     return Response(generate_latest(REGISTRY), mimetype='text/plain')
 
-# ============================================
-# Страница голосования
-# ============================================
 HTML = """
 <!DOCTYPE html>
 <html>
