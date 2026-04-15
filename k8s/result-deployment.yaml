@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
       - name: result
-        image: dockersamples/examplevotingapp_result
+        image: result-with-metrics:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 80
         resources:

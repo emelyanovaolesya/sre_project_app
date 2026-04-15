@@ -1,0 +1,56 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: vote-podmonitor
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: vote
+  namespaceSelector:
+    matchNames:
+      - voting-app
+  podMetricsEndpoints:
+  - targetPort: 80
+    path: /metrics
+    interval: 30s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: result-podmonitor
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: result
+  namespaceSelector:
+    matchNames:
+      - voting-app
+  podMetricsEndpoints:
+  - targetPort: 80
+    path: /metrics
+    interval: 30s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: worker-podmonitor
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: worker
+  namespaceSelector:
+    matchNames:
+      - voting-app
+  podMetricsEndpoints:
+  - targetPort: 8080
+    path: /metrics
+    interval: 30s

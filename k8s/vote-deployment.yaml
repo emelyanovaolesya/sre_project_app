@@ -15,14 +15,15 @@ spec:
     spec:
       containers:
       - name: vote
-        image: dockersamples/examplevotingapp_vote
+        image: vote-with-metrics:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 80
         env:
-        - name: OPTION_A
-          value: "Cats"
-        - name: OPTION_B
-          value: "Dogs"
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
         resources:
           requests:
             memory: "64Mi"

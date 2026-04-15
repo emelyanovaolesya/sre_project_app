@@ -20,8 +20,23 @@ spec:
         - containerPort: 6379
         resources:
           requests:
-            memory: "128Mi"
+            memory: "64Mi"
             cpu: "100m"
           limits:
-            memory: "256Mi"
+            memory: "128Mi"
             cpu: "200m"
+      - name: redis-exporter
+        image: oliver006/redis_exporter:latest
+        ports:
+        - name: metrics
+          containerPort: 9121
+        env:
+        - name: REDIS_ADDR
+          value: "redis://localhost:6379"
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "50m"
+          limits:
+            memory: "64Mi"
+            cpu: "100m"

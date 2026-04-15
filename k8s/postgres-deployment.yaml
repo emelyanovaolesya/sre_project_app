@@ -27,8 +27,23 @@ spec:
           value: "votes"
         resources:
           requests:
-            memory: "256Mi"
+            memory: "128Mi"
             cpu: "200m"
           limits:
-            memory: "512Mi"
+            memory: "256Mi"
             cpu: "400m"
+      - name: postgres-exporter
+        image: quay.io/prometheuscommunity/postgres-exporter:v0.14.0
+        ports:
+        - name: metrics
+          containerPort: 9187
+        env:
+        - name: DATA_SOURCE_NAME
+          value: "postgresql://postgres:postgres@localhost:5432/votes?sslmode=disable"
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "50m"
+          limits:
+            memory: "64Mi"
+            cpu: "100m"
